@@ -1,0 +1,139 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [0,0],
+      "id": "63f624e9-4e63-4440-8902-22fe7a02731d",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "prize",
+                    "rightValue": "mois-25",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "e6659e4d-5347-47c8-9d94-d6623b91a722"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "25%"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [672,-368],
+      "id": "2a764326-9e28-4fde-8ce7-4b32742534d0",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "=prize {{ $json.prize }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "id": "1c069955-e5b9-4418-8e05-62792777e400"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "prize"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [240,0],
+      "id": "e5b3e64a-fd2d-43b5-af94-117827524b65",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "H5qeUvdcjbkWQHPh",
+          "mode": "list",
+          "cachedResultName": "Send Email Sub-Workflow"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "mail": "={{ $('When Executed by Another Workflow').item.json.email }}",
+            "Objet": "={{ $('When Executed by Another Workflow').item.json.first_name }}",
+            "Contenu": "={{ $('When Executed by Another Workflow').item.json.first_name }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {"id": "Objet", "displayName": "Objet", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string"},
+            {"id": "Contenu", "displayName": "Contenu", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string"},
+            {"id": "mail", "displayName": "mail", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string"}
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [944,-256],
+      "id": "30497dbb-253f-461e-b97f-9884b55e8d1b",
+      "name": "Execute Workflow"
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [[{"node": "Switch1", "type": "main", "index": 0}]]
+    },
+    "Switch": {
+      "main": [[],[],[],[],[{"node": "Execute Workflow", "type": "main", "index": 0}]]
+    },
+    "Switch1": {
+      "main": [[{"node": "Switch", "type": "main", "index": 0}],[]]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ca5b91cf67df800d9cc02d2e01e79303987a760fd9ee5a1325dfcce9b8381d1e"
+  }
+}

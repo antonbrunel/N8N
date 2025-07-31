@@ -1,0 +1,460 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/HOOKsupabase-contact_data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6f2708c9-1d1d-49e5-9a73-e39dd709b4dc",
+      "name": "Webhook",
+      "webhookId": "d4207a48-9023-48b0-a9be-d6196ee1745c"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "841a7007-3795-420d-b7bf-2766231dccd1",
+              "name": "body.record.first_name",
+              "value": "={{ $json.body.record.first_name }}",
+              "type": "string"
+            },
+            {
+              "id": "69b28ff0-274b-42ac-acf5-44afeda56e2c",
+              "name": "body.record.prize_won",
+              "value": "={{ $json.body.record.prize_won }}",
+              "type": "string"
+            },
+            {
+              "id": "4d1ad176-415d-4523-8bec-afd2838c5594",
+              "name": "body.record.email",
+              "value": "={{ $json.body.record.email }}",
+              "type": "string"
+            },
+            {
+              "id": "1859034a-ed41-460b-81a7-3fc186208694",
+              "name": "body.record.phone",
+              "value": "={{ $json.body.record.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "77f18683-57b9-4e2b-9b8c-9ebcb861a977",
+              "name": "body.record.preferred_contact",
+              "value": "={{ $json.body.record.preferred_contact }}",
+              "type": "string"
+            },
+            {
+              "id": "d851fe6c-84fa-4b25-b6b8-a5bac03f88d4",
+              "name": "body.record.created_at",
+              "value": "={{ $json.body.record.created_at }}",
+              "type": "string"
+            },
+            {
+              "id": "a43a0040-3e69-40b2-a42a-8db968913d12",
+              "name": "body.record.id",
+              "value": "={{ $json.body.record.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ],
+      "id": "dd52cdee-9a00-4fc1-9f05-2be6170bf774",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.record.preferred_contact }}",
+                    "rightValue": "email",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d3e5d883-8532-4df7-976d-321374c571fa"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "email"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "3c319f61-7d4b-4586-8cbc-00f6abc79c8c",
+                    "leftValue": "={{ $json.body.record.preferred_contact }}",
+                    "rightValue": "call",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "call"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "1cd638c0-f9bb-4bf5-aea8-7a5ce17ce223",
+                    "leftValue": "={{ $json.body.record.preferred_contact }}",
+                    "rightValue": "whatsapp",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "whatsapp"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "d9f242c3-ea6d-455c-b87d-6ed57314fb0d",
+                    "leftValue": "={{ $json.body.record.preferred_contact }}",
+                    "rightValue": "sms",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "sms"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        496,
+        -32
+      ],
+      "id": "14be335c-6429-4b41-81f9-b3bcf9b518c4",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "SMiB1ZiLjztSJYWW",
+          "mode": "list",
+          "cachedResultName": "Format Email Sub-Workflow"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        736,
+        -384
+      ],
+      "id": "72a418e5-db73-4414-a54d-47ae44d83a71",
+      "name": "Execute Workflow",
+      "alwaysOutputData": false,
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "e1wMGNLJYHA0PBBf",
+          "mode": "list",
+          "cachedResultName": "Format Sms Sub-Workflow"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        736,
+        -240
+      ],
+      "id": "ac1b285f-3bc7-4052-9b94-01d500539c61",
+      "name": "Execute Workflow1"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "Ec27Y2RJLhV9UZ64",
+          "mode": "list",
+          "cachedResultName": "Format Whatsapp Sub-Workflow"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        736,
+        -96
+      ],
+      "id": "457b7641-d516-4c49-926f-1bb9934fd1cc",
+      "name": "Execute Workflow2"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "e1wMGNLJYHA0PBBf",
+          "mode": "list",
+          "cachedResultName": "Format Sms Sub-Workflow"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        736,
+        48
+      ],
+      "id": "cbc68cda-18b9-43a8-b774-58c826d5817f",
+      "name": "Execute Workflow3"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "SMiB1ZiLjztSJYWW",
+          "mode": "list",
+          "cachedResultName": "Format Email Sub-Workflow"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        480,
+        -384
+      ],
+      "id": "2291dc87-7be8-4012-8fc5-07e95744826d",
+      "name": "Execute Workflow4"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execute Workflow4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Execute Workflow1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Execute Workflow2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Execute Workflow3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "pinData": {
+    "Webhook": [
+      {
+        "headers": {
+          "host": "stepup.zeabur.app",
+          "user-agent": "pg_net/0.14.0",
+          "content-length": "384",
+          "accept": "*/*",
+          "content-type": "application/json",
+          "x-forwarded-for": "192.168.0.146, 192.168.0.146",
+          "x-forwarded-host": "stepup.zeabur.app",
+          "x-forwarded-port": "443",
+          "x-forwarded-proto": "https",
+          "x-real-ip": "192.168.0.146",
+          "x-zeabur-container-port": "5678",
+          "x-zeabur-request-id": "cgk1::f7157705-bed6-488d-b0ba-e064d95c8e89",
+          "accept-encoding": "gzip"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "type": "INSERT",
+          "table": "contact_data",
+          "record": {
+            "id": "ba1b6f4f-0e7b-4e14-8047-52ca55b5ca94",
+            "email": "antton.brunel@gmail.com",
+            "phone": "0783005392",
+            "prize_won": "BILAN OFFERT",
+            "created_at": "2025-07-31T09:17:20.306073+00:00",
+            "first_name": "Antton",
+            "session_id": "session_1753953369705_jlxs8pvxxvj",
+            "preferred_contact": "email"
+          },
+          "schema": "public",
+          "old_record": null
+        },
+        "webhookUrl": "https://stepup.zeabur.app/webhook-test/HOOKsupabase-contact_data",
+        "executionMode": "test"
+      }
+    ],
+    "Edit Fields": [
+      {
+        "body": {
+          "record": {
+            "first_name": "Antton",
+            "prize_won": "BILAN OFFERT",
+            "email": "antton.brunel@gmail.com",
+            "phone": "0783005392",
+            "preferred_contact": "email",
+            "created_at": "2025-07-31T09:17:20.306073+00:00",
+            "id": "ba1b6f4f-0e7b-4e14-8047-52ca55b5ca94"
+          }
+        }
+      }
+    ]
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ca5b91cf67df800d9cc02d2e01e79303987a760fd9ee5a1325dfcce9b8381d1e"
+  }
+}

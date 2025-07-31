@@ -1,0 +1,49 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [0,0],
+      "id": "7d61404d-4ae0-44c2-8621-19f30a1adf9f",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.mail }}",
+        "subject": "={{ $json.Objet }}",
+        "message": "={{ $json.Contenu }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [208,0],
+      "id": "79e80219-0032-4f4a-a528-b5e1024f7e83",
+      "name": "Send a message",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "DWqD3goc6WwOPrTN",
+          "name": "Gmail account"
+        }
+      },
+      "disabled": true
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [[{"node": "Send a message", "type": "main", "index": 0}]]
+    },
+    "Send a message": {
+      "main": [[]]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ca5b91cf67df800d9cc02d2e01e79303987a760fd9ee5a1325dfcce9b8381d1e"
+  }
+}

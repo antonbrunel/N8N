@@ -2,81 +2,6 @@
   "nodes": [
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "/HOOKsupabase-contact_data",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        0,
-        0
-      ],
-      "id": "6f2708c9-1d1d-49e5-9a73-e39dd709b4dc",
-      "name": "Webhook",
-      "webhookId": "d4207a48-9023-48b0-a9be-d6196ee1745c"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "841a7007-3795-420d-b7bf-2766231dccd1",
-              "name": "body.record.first_name",
-              "value": "={{ $json.body.record.first_name }}",
-              "type": "string"
-            },
-            {
-              "id": "69b28ff0-274b-42ac-acf5-44afeda56e2c",
-              "name": "body.record.prize_won",
-              "value": "={{ $json.body.record.prize_won }}",
-              "type": "string"
-            },
-            {
-              "id": "4d1ad176-415d-4523-8bec-afd2838c5594",
-              "name": "body.record.email",
-              "value": "={{ $json.body.record.email }}",
-              "type": "string"
-            },
-            {
-              "id": "1859034a-ed41-460b-81a7-3fc186208694",
-              "name": "body.record.phone",
-              "value": "={{ $json.body.record.phone }}",
-              "type": "string"
-            },
-            {
-              "id": "77f18683-57b9-4e2b-9b8c-9ebcb861a977",
-              "name": "body.record.preferred_contact",
-              "value": "={{ $json.body.record.preferred_contact }}",
-              "type": "string"
-            },
-            {
-              "id": "d851fe6c-84fa-4b25-b6b8-a5bac03f88d4",
-              "name": "body.record.created_at",
-              "value": "={{ $json.body.record.created_at }}",
-              "type": "string"
-            },
-            {
-              "id": "a43a0040-3e69-40b2-a42a-8db968913d12",
-              "name": "body.record.id",
-              "value": "={{ $json.body.record.id }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        240,
-        0
-      ],
-      "id": "dd52cdee-9a00-4fc1-9f05-2be6170bf774",
-      "name": "Edit Fields"
-    },
-    {
-      "parameters": {
         "rules": {
           "values": [
             {
@@ -185,11 +110,258 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        496,
+        704,
         -32
       ],
       "id": "14be335c-6429-4b41-81f9-b3bcf9b518c4",
-      "name": "Switch"
+      "name": "Email / Call / Whatsapp / Sms"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/HOOKsupabase-contact_data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        80,
+        0
+      ],
+      "id": "6f2708c9-1d1d-49e5-9a73-e39dd709b4dc",
+      "name": "Supabase",
+      "webhookId": "d4207a48-9023-48b0-a9be-d6196ee1745c"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "SMiB1ZiLjztSJYWW",
+          "mode": "list",
+          "cachedResultName": "Format Email Sub-Workflow"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        752,
+        -384
+      ],
+      "id": "2291dc87-7be8-4012-8fc5-07e95744826d",
+      "name": "Format email bienvenue"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "841a7007-3795-420d-b7bf-2766231dccd1",
+              "name": "body.record.first_name",
+              "value": "={{ $json.body.record.first_name }}",
+              "type": "string"
+            },
+            {
+              "id": "69b28ff0-274b-42ac-acf5-44afeda56e2c",
+              "name": "body.record.prize_won",
+              "value": "={{ $json.body.record.prize_won }}",
+              "type": "string"
+            },
+            {
+              "id": "4d1ad176-415d-4523-8bec-afd2838c5594",
+              "name": "body.record.email",
+              "value": "={{ $json.body.record.email }}",
+              "type": "string"
+            },
+            {
+              "id": "1859034a-ed41-460b-81a7-3fc186208694",
+              "name": "body.record.phone",
+              "value": "={{ $json.body.record.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "77f18683-57b9-4e2b-9b8c-9ebcb861a977",
+              "name": "body.record.preferred_contact",
+              "value": "={{ $json.body.record.preferred_contact }}",
+              "type": "string"
+            },
+            {
+              "id": "d851fe6c-84fa-4b25-b6b8-a5bac03f88d4",
+              "name": "body.record.created_at",
+              "value": "={{ $json.body.record.created_at }}",
+              "type": "string"
+            },
+            {
+              "id": "a43a0040-3e69-40b2-a42a-8db968913d12",
+              "name": "body.record.id",
+              "value": "={{ $json.body.record.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        320,
+        0
+      ],
+      "id": "dd52cdee-9a00-4fc1-9f05-2be6170bf774",
+      "name": "Extract data"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6a864b75-d711-4f80-a58b-810fed49f934",
+              "name": "body",
+              "value": "={{ $('Extract data').item.json.body }}",
+              "type": "object"
+            },
+            {
+              "id": "7517f9c0-516f-4cdd-be68-ec078fbd76ef",
+              "name": "Tag preferred_contact",
+              "value": "={{ $('Extract data').item.json.body.record.preferred_contact }} 1",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1088,
+        -384
+      ],
+      "id": "45b9c2c0-a79b-475b-8337-16c4ee9e8c92",
+      "name": "Tag email 1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4bda74e8-7821-4ea3-ba97-9bf0cec12d32",
+              "name": "body",
+              "value": "={{ $('Extract data').item.json.body }}",
+              "type": "object"
+            },
+            {
+              "id": "b024189d-5906-424e-af4f-390f1e7f4b67",
+              "name": "body.record.preferred_contact",
+              "value": "={{ $('Extract data').item.json.body.record.preferred_contact }} call 1",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1088,
+        -240
+      ],
+      "id": "14574c90-7f01-48d4-9d43-6e075efab0cb",
+      "name": "Tag sms call 1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2e6ecf16-2d2e-422b-980e-1b2d263e9c9e",
+              "name": "body",
+              "value": "={{ $('Extract data').item.json.body }}",
+              "type": "object"
+            },
+            {
+              "id": "90a4d880-dcf5-4752-9bdc-475bd1f76823",
+              "name": "body.record.preferred_contact",
+              "value": "={{ $('Extract data').item.json.body.record.preferred_contact }} 1",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1088,
+        -96
+      ],
+      "id": "775866b7-200c-47ae-a42b-3117ca990c27",
+      "name": "Tag whatsapp 1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3e1dfdfe-6860-4ae0-9984-3dc5d169359b",
+              "name": "body",
+              "value": "={{ $('Extract data').item.json.body }}",
+              "type": "object"
+            },
+            {
+              "id": "d495416c-c754-44c5-905b-e5aebe26e946",
+              "name": "body.record.preferred_contact",
+              "value": "={{ $('Extract data').item.json.body.record.preferred_contact }} sms 1",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1088,
+        48
+      ],
+      "id": "57a59d25-1d36-4a22-a416-59d7386130f7",
+      "name": "Tag sms 1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "36e07600-ef41-47c1-a5fb-d288152e5d66",
+              "name": "body",
+              "value": "={{ $json.body }}",
+              "type": "object"
+            },
+            {
+              "id": "4031bc3a-1c43-48e2-bb34-a5c1155a997c",
+              "name": "Email de bienvenue",
+              "value": "welcome",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        560,
+        -384
+      ],
+      "id": "399ca46d-8909-4e51-b69a-d20911e2a0ff",
+      "name": "Tag welcome"
     },
     {
       "parameters": {
@@ -214,13 +386,11 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2,
       "position": [
-        736,
+        1328,
         -384
       ],
       "id": "72a418e5-db73-4414-a54d-47ae44d83a71",
-      "name": "Execute Workflow",
-      "alwaysOutputData": false,
-      "retryOnFail": false
+      "name": "Format email"
     },
     {
       "parameters": {
@@ -243,11 +413,11 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2,
       "position": [
-        736,
+        1328,
         -240
       ],
       "id": "ac1b285f-3bc7-4052-9b94-01d500539c61",
-      "name": "Execute Workflow1"
+      "name": "Format call"
     },
     {
       "parameters": {
@@ -270,11 +440,11 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2,
       "position": [
-        736,
+        1328,
         -96
       ],
       "id": "457b7641-d516-4c49-926f-1bb9934fd1cc",
-      "name": "Execute Workflow2"
+      "name": "Format whatsapp"
     },
     {
       "parameters": {
@@ -297,108 +467,131 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2,
       "position": [
-        736,
+        1328,
         48
       ],
       "id": "cbc68cda-18b9-43a8-b774-58c826d5817f",
-      "name": "Execute Workflow3"
-    },
-    {
-      "parameters": {
-        "workflowId": {
-          "__rl": true,
-          "value": "SMiB1ZiLjztSJYWW",
-          "mode": "list",
-          "cachedResultName": "Format Email Sub-Workflow"
-        },
-        "workflowInputs": {
-          "mappingMode": "defineBelow",
-          "value": {},
-          "matchingColumns": [],
-          "schema": [],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": true
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1.2,
-      "position": [
-        480,
-        -384
-      ],
-      "id": "2291dc87-7be8-4012-8fc5-07e95744826d",
-      "name": "Execute Workflow4"
+      "name": "Format sms"
     }
   ],
   "connections": {
-    "Webhook": {
+    "Email / Call / Whatsapp / Sms": {
       "main": [
         [
           {
-            "node": "Edit Fields",
+            "node": "Tag email 1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Tag sms call 1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Tag whatsapp 1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Tag sms 1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Edit Fields": {
+    "Supabase": {
       "main": [
         [
           {
-            "node": "Switch",
+            "node": "Extract data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract data": {
+      "main": [
+        [
+          {
+            "node": "Email / Call / Whatsapp / Sms",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Execute Workflow4",
+            "node": "Tag welcome",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Switch": {
+    "Tag email 1": {
       "main": [
         [
           {
-            "node": "Execute Workflow",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Execute Workflow1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Execute Workflow2",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Execute Workflow3",
+            "node": "72a418e5-db73-4414-a54d-47ae44d83a71",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Execute Workflow": {
+    "Tag sms call 1": {
       "main": [
-        []
+        [
+          {
+            "node": "ac1b285f-3bc7-4052-9b94-01d500539c61",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tag whatsapp 1": {
+      "main": [
+        [
+          {
+            "node": "457b7641-d516-4c49-926f-1bb9934fd1cc",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tag sms 1": {
+      "main": [
+        [
+          {
+            "node": "cbc68cda-18b9-43a8-b774-58c826d5817f",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tag welcome": {
+      "main": [
+        [
+          {
+            "node": "Format email bienvenue",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
   "pinData": {
-    "Webhook": [
+    "Supabase": [
       {
         "headers": {
           "host": "stepup.zeabur.app",
@@ -437,7 +630,7 @@
         "executionMode": "test"
       }
     ],
-    "Edit Fields": [
+    "Extract data": [
       {
         "body": {
           "record": {
